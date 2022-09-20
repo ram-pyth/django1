@@ -19,3 +19,13 @@ def index(request):
     }
 
     return render(request, "index.html", context=kontext)
+
+
+def authors(request):
+    autoriai = Author.objects.all()
+
+    kontext = {
+        "authors": autoriai
+    }
+
+    return render(request, "authors.html", context=kontext)
