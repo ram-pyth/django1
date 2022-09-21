@@ -4,6 +4,8 @@
 <h1>Autoriai</h1>
 <p>Mūsų autorių sąrašas.</p>
 {% for a in authors %}
-<li>{{a.first_name}} {{a.last_name}}</li>
+<li>
+   <a href="{% url 'author' a.id %}">{{a.first_name}} {{a.last_name}}</a>
+</li>
 {% endfor %}
 {% endblock %}
