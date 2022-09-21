@@ -1,3 +1,10 @@
+hr {
+    width: 100%;
+    background-color: black;
+    height: 1px;
+    border-color : transparent;
+}
+
 .sidebar-nav {
     margin-top: 20px;
     padding: 0;

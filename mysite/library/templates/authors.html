@@ -3,9 +3,9 @@
 {% block content %}
 <h1>Autoriai</h1>
 <p>Mūsų autorių sąrašas.</p>
-{% for a in authors %}
+{% for a in authors_kint_key %}
 <li>
-   <a href="{% url 'author' a.id %}">{{a.first_name}} {{a.last_name}}</a>
+   <a href="{% url 'author_link' a.id %}">{{a.first_name}} {{a.last_name}}</a>
 </li>
 {% endfor %}
 {% endblock %}
