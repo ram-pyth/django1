@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
+from django.core.paginator import Paginator
 
 from .models import Book, Author, BookInstance
 
@@ -23,8 +24,10 @@ def index(request):
 
 
 def authors_funkc(request):
-    autoriai = Author.objects.all()
-    kontext = {"authors_kint_key": autoriai}
+    paginator = Paginator(Author.objects.all(), 2)
+    page_number = request.GET.get('page')
+    paged_authors = paginator.get_page(page_number)
+    kontext = {"authors_kint_key": paged_authors}
     return render(request, "authors.html", context=kontext)
 
 
