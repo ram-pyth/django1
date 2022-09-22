@@ -3,7 +3,7 @@
 {% block content %}
 <h1>{{ book.title }}</h1>
 
-<p>Autorius:<a href="{% url 'author_link' book.author.pk %}">{{ book.author }}</a></p>
+<p>Autorius: <a href="{% url 'author_link' book.author.pk %}">{{ book.author }}</a></p>
 <p>Aprašymas: {{book.summary}}</p>
 <p>ISBN: {{book.isbn}}</p>
 <p>Žanras: {{book.genre.all|join:", "}}</p>
@@ -13,14 +13,15 @@
 
     {% for copy in book.bookinstance_set.all %}
     <hr>
-    <p class="{% if copy.status == 'a' %}text-success{% elif copy.status == 'p' %}text-danger{% else %}text-warning{% endif %}">
+    <p class="{% if copy.status == 'g' %}text-success
+    {% elif copy.status == 'p' %}text-danger
+    {% else %}text-warning{% endif %}">
         {{ copy.get_status_display }}
     </p>
+    {% if copy.status != 'g' %}
+    <p>Bus grąžinta: {{ copy.due_back }}</p>
+    {% endif %}
+    <p class="text-muted">Id: {{ copy.id }} </p>
     {% endfor %}
-
-
-
-
-
 </div>
 {% endblock %}
