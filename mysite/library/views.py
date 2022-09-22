@@ -1,6 +1,6 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
-from django.core.paginator import Paginator
 
 from .models import Book, Author, BookInstance
 
@@ -25,6 +25,7 @@ def index(request):
 
 def authors_funkc(request):
     paginator = Paginator(Author.objects.all(), 2)
+    # request.GET - kliento GET užklausos parametrų žodynas, raktu page gaunam puslapio nr
     page_number = request.GET.get('page')
     paged_authors = paginator.get_page(page_number)
     kontext = {"authors_kint_key": paged_authors}

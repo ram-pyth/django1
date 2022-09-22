@@ -2,16 +2,16 @@
 
 {% block content %}
     <div class="container author">
-        <h4>{{ author_kint_key.first_name }} {{ author_kint_key.author.last_name }}</h4>
+        <h4>{{ author_kint_key.first_name }} {{ author_kint_key.last_name }}</h4>
         <hr>
         <p>{{ author_kint_key.description }}</p>
         <hr>
         <br>
-        <h5>Mes turime šias {{ author_kint_key.author.first_name }}
-            {{ author_kint_key.author.last_name }} knygas:</h5>
+        <h5>Mes turime šias {{ author_kint_key.first_name }}
+            {{ author_kint_key.last_name }} knygas:</h5>
         <p>{{author.books.all}}</p>
         {% for i in author_kint_key.books.all %}
-            <li>{{i.title}}</li>
+            <li>{{i.title}} <a href="{% url 'book-detail' i.id %}">linkas</a></li>
         {% endfor %}
     </div>
 {% endblock %}
