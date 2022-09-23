@@ -5,22 +5,22 @@ hr {
     border-color : transparent;
 }
 
-/*.sidebar-nav {
+.sidebar-nav {
     margin-top: 20px;
     padding: 0;
     list-style: none;
-}*/
+}
 
 .card-img-top {
     height: 300px;
     width: auto;
 }
 
-
-/* .sidebar-nav {
-    margin-top: 20px;
-    padding: 0;
-    list-style: none;
+.card {
+    display: inline-block;
+    height: 300px;
+    margin-right: 15px;
+    margin-bottom: 15px;
 }
 
 .author {
@@ -35,7 +35,7 @@ hr {
 
 .search_field{
     margin-top: 20px;
-} */
+}
 
 .card {
     display: inline-block;
