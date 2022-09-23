@@ -1,8 +1,11 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
+import logging
 
 from .models import Book, Author, BookInstance
+
+logger = logging.getLogger(__name__)
 
 
 def index(request):
@@ -23,6 +26,8 @@ def authors_funkc(request):
     paginator = Paginator(Author.objects.all(), 2)
     # request.GET - kliento GET užklausos parametrų žodynas, raktu page gaunam puslapio nr
     page_number = request.GET.get('page')
+    logger.warning('requestas GET -' + str(request.GET))
+    # logger.warning('requestas -' + repr(request.POST))
     paged_authors = paginator.get_page(page_number)
     kontext = {"authors_kint_key": paged_authors}
     return render(request, "authors.html", context=kontext)
@@ -31,6 +36,12 @@ def authors_funkc(request):
 def author_func(request, author_id):
     single_author = get_object_or_404(Author, pk=author_id)
     return render(request, "author.html", {"author_kint_key": single_author})
+
+
+def search(request):
+    query_text = request.GET.get("query")
+    search_results = Book.objects.filter(title__icontains=query_text)
+    return render(request, "search.html", {"books": search_results, "querytxt": query_text})
 
 
 class BookListView(generic.ListView):
