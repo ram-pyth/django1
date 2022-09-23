@@ -18,10 +18,11 @@ class Genre(models.Model):
 
 class Book(models.Model):
     title = models.CharField("Pavadinimas", max_length=200)
-    author = models.ForeignKey("Author", on_delete=models.SET_NULL, null=True, related_name="rname_books")
+    author = models.ForeignKey("Author", on_delete=models.SET_NULL, null=True, related_name="books")
     summary = models.TextField("Aprasymas", max_length=1000, help_text="Trumpas knygos aprašymas")
     isbn = models.CharField("ISBN", max_length=13)
     genre = models.ManyToManyField(Genre, help_text="Išrinkite žanrą(us) šiai knygai")
+    cover = models.ImageField("Viršelis", upload_to="covers/", null=True)
 
     def __str__(self):
         return self.title
