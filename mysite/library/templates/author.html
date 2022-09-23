@@ -9,9 +9,9 @@
         <br>
         <h5>Mes turime šias {{ author_kint_key.first_name }}
             {{ author_kint_key.last_name }} knygas:</h5>
-        <p>{{author.books.all}}</p>
-        {% for i in author_kint_key.books.all %}
-            <li>{{i.title}} <a href="{% url 'book-detail' i.id %}">knygos linkas</a></li>
+        <p>{{ author_kint_key.rname_books.all }}</p>
+        {% for i in author_kint_key.rname_books.all %}
+            <li>{{ i.title }} <a href="{% url 'book-detail' i.id %}">knygos linkas</a></li>
         {% endfor %}
     </div>
 {% endblock %}

@@ -29,6 +29,7 @@ def authors_funkc(request):
     # request.GET - kliento GET užklausos parametrų žodynas, raktu page gaunam puslapio nr
     page_number = request.GET.get('page')
     logger.warning('requestas GET -' + str(request.GET))
+    logger.warning('requestas GET -' + str(request.headers))
     paged_authors = paginator.get_page(page_number)
     kontext = {"authors_kint_key": paged_authors}
     return render(request, "authors.html", context=kontext)
