@@ -132,3 +132,11 @@ MEDIA_URL = 'media/'
 FILE_UPLOAD_MAX_MEMORY_SIZE = 5242880 # make it 5Mb instead of
 
 LOGIN_REDIRECT_URL = '/'
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "mail.pythonkursas.smshostingas.lt"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "destytojas@pythonkursas.smshostingas.lt"
+EMAIL_HOST_PASSWORD = "PythonKursas2022"
+
