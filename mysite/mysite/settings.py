@@ -130,3 +130,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'library/media/')
 MEDIA_URL = 'media/'
 
 FILE_UPLOAD_MAX_MEMORY_SIZE = 5242880 # make it 5Mb instead of
+
+LOGIN_REDIRECT_URL = '/'

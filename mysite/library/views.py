@@ -15,11 +15,15 @@ def index(request):
     num_instances = BookInstance.objects.all().count()
     num_instances_available = BookInstance.objects.filter(status__exact="g").count()
     num_authors = Author.objects.count()
+
+    num_visits = request.session.get('num_visits', 1)
+    request.session['num_visits'] = num_visits + 1
     kontext = {
         "num_books": num_books,
         "num_instances": num_instances,
         "num_instances_available": num_instances_available,
-        "num_authors": num_authors
+        "num_authors": num_authors,
+        "num_visits": num_visits
     }
     return render(request, "index.html", context=kontext)
 
@@ -28,8 +32,7 @@ def authors_funkc(request):
     paginator = Paginator(Author.objects.all(), 2)
     # request.GET - kliento GET užklausos parametrų žodynas, raktu page gaunam puslapio nr
     page_number = request.GET.get('page')
-    logger.warning('requestas GET -' + str(request.GET))
-    logger.warning('requestas GET -' + str(request.headers))
+    # logger.warning('requestas GET -' + str(request.headers))
     paged_authors = paginator.get_page(page_number)
     kontext = {"authors_kint_key": paged_authors}
     return render(request, "authors.html", context=kontext)
@@ -47,7 +50,7 @@ def search(request):
 
 
 class BookListView(generic.ListView):
-    model = Book
+    model = Book # automatiškai į kontekstą book_list
     paginate_by = 2
     template_name = "book_list.html"
 
