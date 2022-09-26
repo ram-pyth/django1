@@ -71,7 +71,7 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'authors_link' %}">Autoriai</a>
             </li>
-          </ul>
+
            {% if user.is_authenticated %}
             <li class="nav-item"><a class="nav-link" href="#">
               <svg class="bi bi-person" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -84,7 +84,7 @@
             <li class="nav-item"><a class="nav-link" href="{% url 'login'%}?next={{request.path}}">Prisijungti</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Registruotis</a></li>
           {% endif %}
-
+          </ul>
           <form
             class="form-inline my-2 my-lg-0"
             action="{% url 'search_link' %}"
