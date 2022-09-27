@@ -1,5 +1,6 @@
 import uuid
 from datetime import date
+from tinymce.models import HTMLField
 
 from django.contrib.auth.models import User
 from django.db import models
@@ -42,13 +43,13 @@ class Book(models.Model):
 class Author(models.Model):
     first_name = models.CharField("Vardas", max_length=100)
     last_name = models.CharField("Pavarde", max_length=100)
-    description = models.TextField("Aprašymas", max_length=2000, default="Žinomas autorius.")
+    description = HTMLField()
 
     class Meta:
         ordering = ["last_name", "first_name"]
 
     def get_absolute_url(self):
-        return reverse("author-detail", args=[str(self.id)])
+        return reverse("author_link", args=[str(self.id)])
 
     def display_books(self):
         return ", ".join(book.title for book in self.books.all()[:3])
