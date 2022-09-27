@@ -139,7 +139,7 @@ EMAIL_HOST = "mail.pythonkursas.smshostingas.lt"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 # EMAIL_HOST_USER = "destytojas@pythonkursas.smshostingas.lt"
-# EMAIL_HOST_PASSWORD = "secret "
+# EMAIL_HOST_PASSWORD = "secret"
 
 TINYMCE_DEFAULT_CONFIG = {
     'height': 360,
