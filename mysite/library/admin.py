@@ -10,6 +10,7 @@ class AuthorAdmin(admin.ModelAdmin):
 class BooksInstanceInline(admin.TabularInline):
     model = BookInstance
     # readonly_fields = ("id",)
+    # readonly_fields = ("is_overdue",)
     # can_delete = False
     extra = 0
 
@@ -20,7 +21,7 @@ class BookAdmin(admin.ModelAdmin):
 
 
 class BookInstanceAdmin(admin.ModelAdmin):
-    list_display = ("book", "status", "reader", "due_back")
+    list_display = ("book", "status", "reader", "due_back", "is_overdue")
     list_editable = ("due_back", "status")
     list_filter = ("status", "due_back")
     search_fields = ("id", "book__title")
