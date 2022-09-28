@@ -1,14 +1,16 @@
 import logging
 
+from django.contrib import messages
+from django.contrib.auth.forms import User
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views import generic
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.forms import User
 from django.views.decorators.csrf import csrf_protect
-from django.contrib import messages
+from django.views.generic.edit import FormMixin
 
+from .forms import BookReviewForm
 from .models import Book, Author, BookInstance
 
 logger = logging.getLogger(__name__)
@@ -59,9 +61,30 @@ class BookListView(generic.ListView):
     template_name = "book_list.html"
 
 
-class BookDetailView(generic.DetailView):
+class BookDetailView(FormMixin, generic.DetailView):
     model = Book
     template_name = "book_detail.html"
+    form_class = BookReviewForm
+
+    class Meta:
+        ordering = ["title"]
+
+    def get_success_url(self):
+        return reverse("book-detail", kwargs={"pk": self.object.id})
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        form.instance.book = self.object
+        form.instance.reviewer = self.request.user
+        form.save()
+        return super(BookDetailView, self).form_valid(form)
 
 
 class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
@@ -85,15 +108,16 @@ def register(request):
         if password == password2:
             # tikrinimas ar neužimtas username
             if User.objects.filter(username=username).exists():
-                messages.error(request, f"Vartotojo vardas {username} užimtas!")
+                messages.warning(request, f"Vartotojo vardas {username} užimtas!")
                 return redirect("register")
             else:
                 if User.objects.filter(email=email).exists():
-                    messages.error(request, f"Vartotojas su el. paštu {email} jau užregistruotas!")
+                    messages.error(request, f"Vartotojas su el. paštu {email} jau užregistruotas!", extra_tags="danger")
                     return redirect("register")
                 else:
                     # jei patikrinimai praeiti, registruojam naują
                     User.objects.create_user(username=username, email=email, password=password)
+                    messages.success(request, f'Vartotojas {username} sukurtas')
         else:
             messages.error(request, "Slaptažodžiai nesutampa!!!")
             return redirect("register")

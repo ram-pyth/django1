@@ -6,12 +6,12 @@
         <h3>Registracija</h3><br/>
         {% if messages %}
             {% for message in messages %}
-                <div class="alert alert-danger" role="alert">
+                <div class="alert alert-{{ message.extra_tags }}" role="alert">
                     {{ message }}
                 </div>
             {% endfor %}
         {% endif %}
-        <form method="post">
+        <form id="regform" method="post">
             {% csrf_token %}
             <div class="form-group">
                 <label for="username">Vartotojo vardas</label>
