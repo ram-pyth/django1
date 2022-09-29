@@ -3,6 +3,7 @@ import logging
 from django.contrib import messages
 from django.contrib.auth.forms import User
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect, reverse
@@ -122,3 +123,8 @@ def register(request):
             messages.error(request, "Slaptažodžiai nesutampa!!!")
             return redirect("register")
     return render(request, "register.html")
+
+
+@login_required
+def profilis(request):
+    return render(request, "profilis.html")
