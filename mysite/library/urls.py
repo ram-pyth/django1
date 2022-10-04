@@ -13,4 +13,6 @@ urlpatterns = [
     path("register/", views.register, name="register"),
     path("profilis/", views.profilis, name="profilis"),
     path('mybooks/<uuid:pk>', views.BookByUserDetailView.as_view(), name='my-book'),
+    path('mybooks/new', views.BookByUserCreateView.as_view(), name='my-borrowed-new'),
+    path('mybooks/<uuid:pk>/update', views.BookByUserUpdateView.as_view(), name='my-book-update'),
 ]
