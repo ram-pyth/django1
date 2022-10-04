@@ -146,6 +146,7 @@ def profilis(request):
 
     return render(request, "profilis.html", context)
 
+
 class BookByUserDetailView(LoginRequiredMixin, generic.DetailView):
     model = BookInstance
     template_name = 'user_book.html'
@@ -160,6 +161,7 @@ class BookByUserCreateView(LoginRequiredMixin, generic.CreateView):
     def form_valid(self, form):
         form.instance.reader = self.request.user
         return super().form_valid(form)
+
 
 class BookByUserUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = BookInstance

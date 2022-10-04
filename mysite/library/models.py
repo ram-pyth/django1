@@ -1,11 +1,11 @@
 import uuid
 from datetime import date
-from tinymce.models import HTMLField
-from PIL import Image
 
+from PIL import Image
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
+from tinymce.models import HTMLField
 
 
 class Genre(models.Model):
@@ -114,4 +114,3 @@ class Profilis(models.Model):
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.nuotrauka.path)
-
