@@ -145,3 +145,7 @@ def profilis(request):
     }
 
     return render(request, "profilis.html", context)
+
+class BookByUserDetailView(LoginRequiredMixin, generic.DetailView):
+    model = BookInstance
+    template_name = 'user_book.html'

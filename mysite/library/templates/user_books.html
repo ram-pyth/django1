@@ -10,6 +10,7 @@
         <a href="{% url 'book-detail' bookinst.book.id %}">{{ bookinst.book.title }}</a>
         {{ bookinst.due_back }}
     </li>
+    <a class="btn btn-primary" href="{{ bookinst.pk }}" role="button">Peržiūrėti</a>
     {% endfor %}
 
 </ul>
